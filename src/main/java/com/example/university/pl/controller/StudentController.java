@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/students")
 public class StudentController {
     private final StudentService studentService;
 
@@ -16,19 +17,19 @@ public class StudentController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/students")
+    @GetMapping
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
-    @PostMapping("/students")
+    @PostMapping
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
     }
-    @PutMapping("/students/{id}")
+    @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
         return studentService.updateStudent(id, student);
     }
-    @DeleteMapping("/students/{id}")
+    @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
     }
